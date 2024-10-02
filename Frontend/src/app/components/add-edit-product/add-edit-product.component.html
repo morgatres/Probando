@@ -1,0 +1,47 @@
+@if (loading) {<app-progress-bar></app-progress-bar>}
+@else {
+<div class="row mt-1"> 
+    <div class="container d-flex justify-content-center"> 
+        <div class="card text-white bg-secondary mb-3" style="max-width: 25rem;">
+            <div class="card-header text-center">{{operacion}} Producto</div>
+            <div class="card-body">
+                <form  [formGroup]="formProducto" (ngSubmit)="addProduct()">
+                    <input formControlName="name" type="text" class="form-control" placeholder="Ingrese nombre">
+                    @if((formProducto.get('name')?.hasError('required') || formProducto.get('name')?.hasError('minlength')) && formProducto.get('name')?.touched){
+                        <span class="text-primary-emphasis"> 
+                            El campo nombre es <strong>Requerido</strong>
+                        </span>
+                    }                 
+                    <input formControlName="description" type="text" class="form-control mt-2" placeholder="Ingrese descripcion">
+                    @if(formProducto.get('description')?.hasError('required') && formProducto.get('description')?.touched){
+                        <span class="text-primary-emphasis"> 
+                            El campo descripcion es <strong>Requerido</strong>
+                        </span>
+                    }    
+                    <input formControlName="price" type="number" class="form-control mt-2" placeholder="Ingrese precio"> 
+                    @if(formProducto.get('price')?.hasError('required') && formProducto.get('price')?.touched){
+                        <span class="text-primary-emphasis"> 
+                            El campo precio es <strong>Requerido</strong>
+                        </span>
+                    }    
+                    <input formControlName="stock" type="number" class="form-control mt-2" placeholder="Ingrese stock">
+                    @if(formProducto.get('stock')?.hasError('required') && formProducto.get('stock')?.touched){
+                        <span class="text-primary-emphasis"> 
+                            El campo stock es <strong>Requerido</strong>
+                        </span>
+                    }  
+                    <div class="row mt-2 text-center">
+                        <div class= "col-lg-6">
+                            <button [disabled]="formProducto.invalid" type="submit" class="btn btn-success">Aceptar</button>
+                        </div>
+                        <div class= "col-lg-6">
+                            <button  type="button" class="btn btn-danger" routerLink="/">Cancelar</button>
+                        </div>                        
+                    </div>   
+                                       
+                </form>
+            </div>
+          </div>   
+    </div>
+</div>
+}

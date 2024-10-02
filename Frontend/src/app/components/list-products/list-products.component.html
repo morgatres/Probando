@@ -1,0 +1,38 @@
+@if (loading) {<app-progress-bar></app-progress-bar>}
+@if (!loading) {
+<div class="container">
+    <div class="title">
+        <h4>Listado de Productos</h4>
+        <button type="button" class="btn btn-primary" routerLink="/add">Agregar Producto</button>
+    </div>
+    @if(listProducts.length > 0){
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Stock</th>
+            <th scope="col" ></th>
+          </tr>
+        </thead>
+        <tbody>
+            @for (item of listProducts; track item.id) {
+          <tr  class="table-primary">
+            <td>{{item.name}}</td>
+            <td>{{item.description}}</td>
+            <td>{{item.price | currency}}</td>
+            <td>{{item.stock}}</td>
+            <td>
+                <button type="button" class="btn btn-info btn-sm ms-1" routerLink="/edit/{{item.id}}">Editar</button>
+                <button (click)="deleteProduct(item.id!)" type="button" class="btn btn-danger btn-sm ms-1">Eliminar</button>
+            </td>
+          </tr>
+        }
+        </tbody>
+      </table>
+    } @else {
+      <h5>No hay productos para mostrar</h5>
+    }
+</div>
+}
